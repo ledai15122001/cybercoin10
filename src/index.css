@@ -266,6 +266,64 @@
     color: #00F0FF;
   }
 
+  /* ── Sticky reveal footer architecture ──────────────────────────── */
+  /* The page content becomes an opaque sheet that scrolls OVER the
+     sticky-positioned footer, gradually revealing it like a terminal
+     unlocking. The footer sits at the bottom with z-index below the
+     content stack. */
+  .site-content {
+    position: relative;
+    z-index: 10;
+    background-color: #050507;
+    margin-bottom: -100vh;
+  }
+  /* The content stack carries its own scroll-bound atmosphere so it
+     remains fully opaque (no fixed background bleeding through) while
+     still feeling cyberpunk. */
+  .pa-root {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .pa-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,240,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,255,0.07) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 75%);
+  }
+  .pa-blob { position: absolute; border-radius: 50%; filter: blur(120px); animation: pulse-glow 2s ease-in-out infinite; }
+  .pa-blob-magenta { width: 24rem; height: 24rem; top: -6rem; left: -6rem; background: rgba(255,0,168,0.10); }
+  .pa-blob-cyan { width: 24rem; height: 24rem; top: 28%; right: -6rem; background: rgba(0,240,255,0.10); animation-delay: 1s; }
+  .pa-blob-yellow { width: 24rem; height: 24rem; bottom: 0; left: 25%; background: rgba(255,230,0,0.05); animation-delay: 2s; }
+  .pa-scanline {
+    position: absolute; left: 0; right: 0; height: 1px;
+    background: rgba(0,240,255,0.5); box-shadow: 0 0 20px rgba(0,240,255,0.6);
+    animation: paScan 9s linear infinite;
+  }
+  @keyframes paScan { 0% { transform: translateY(-10px); } 100% { transform: translateY(100vh); } }
+  .pa-binary { position: absolute; inset: 0; overflow: hidden; }
+  .pa-bin {
+    position: absolute; bottom: -20px; font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; color: rgba(0,240,255,0.10); white-space: pre;
+    animation: paBinRise linear infinite;
+  }
+  .pa-bin::before { content: '01010 11010'; }
+  @keyframes paBinRise {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 0.2; } 90% { opacity: 0.2; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+  }
+  .pa-noise {
+    position: absolute; inset: 0; opacity: 0.03; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
   /* Crew Database — final boss one-shot glitch (RGB split, 180ms, then stable) */
   .crew-glitch {
     position: relative;
