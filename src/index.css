@@ -272,7 +272,7 @@
      unlocking. The footer sits at the bottom with z-index below the
      content stack. */
   .site-content{
-    margin-bottom:0;
+    margin-bottom:calc(-1 * var(--footer-height));
 }
   /* The content stack carries its own scroll-bound atmosphere so it
      remains fully opaque (no fixed background bleeding through) while
