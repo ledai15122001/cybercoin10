@@ -271,12 +271,9 @@
      sticky-positioned footer, gradually revealing it like a terminal
      unlocking. The footer sits at the bottom with z-index below the
      content stack. */
-  .site-content {
-    position: relative;
-    z-index: 10;
-    background-color: #050507;
-    margin-bottom: -100vh;
-  }
+  .site-content{
+    margin-bottom:0;
+}
   /* The content stack carries its own scroll-bound atmosphere so it
      remains fully opaque (no fixed background bleeding through) while
      still feeling cyberpunk. */
